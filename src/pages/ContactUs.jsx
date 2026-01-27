@@ -63,18 +63,18 @@ const ContactUs = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "phone") {
+  if (name === "phone") {
   const cleaned = value.replace(/\D/g, "");
   setFormData({ ...formData, phone: cleaned });
 
-  if (cleaned.length !== 10) {
+  if (cleaned.length > 10) {
     setPhoneError("Phone number must be exactly 10 digits");
   } else {
     setPhoneError("");
   }
   return;
 }
-
+ 
     setFormData({ ...formData, [name]: value });
   };
 
