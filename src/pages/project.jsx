@@ -1,40 +1,40 @@
 import React from "react";
 import ProjectCard from "../components/ProjectCard";
+import image1 from "../assets/img1.jpeg";
+import image2 from "../assets/img2.jpg";
+import image3 from "../assets/img3.jpg";
+import image4 from "../assets/img4.jpg";
+import image5 from "../assets/img5.jpg";
 
 const projects = [
   {
     title: "Modern Villa Interior",
     location: "Gurgaon",
-    image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&auto=format&fit=crop&q=80",
+    image: image1,
     slug: "modern-villa-interior",
   },
   {
     title: "Luxury Apartment Design",
     location: "Delhi",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&auto=format&fit=crop&q=80",
+    image:image2,
     slug: "luxury-apartment-design",
   },
   {
     title: "Boutique Office Interior",
     location: "Noida",
-    image:
-      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&auto=format&fit=crop&q=80",
+    image: image3,
     slug: "boutique-office-interior",
   },
   {
     title: "Contemporary Living Room",
     location: "Mumbai",
-    image:
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&auto=format&fit=crop&q=80",
+    image: image4,
     slug: "contemporary-living-room",
   },
   {
     title: "Minimal Bedroom Design",
     location: "Bangalore",
-    image:
-      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&auto=format&fit=crop&q=80",
+    image: image5,
     slug: "minimal-bedroom-design",
   },
 ];

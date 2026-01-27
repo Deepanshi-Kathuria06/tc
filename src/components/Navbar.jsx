@@ -1,8 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+
+  const navLinkClass = ({ isActive }) =>
+    isActive
+      ? "text-[#9c7c3d] font-semibold border-b border-[#9c7c3d]"
+      : "text-[#c6a46a] hover:opacity-70";
+
+  const handleNavClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setOpen(false);
+  };
 
   return (
     <header className="w-full sticky top-0 z-50 bg-white border-b border-[#e6e1d8]">
@@ -32,29 +42,38 @@ const Navbar = () => {
 
           {/* Center Logo */}
           <div className="flex-1 flex justify-center md:absolute md:left-1/2 md:-translate-x-1/2">
-            <Link to="/" className="text-center block">
-              <h1
-                className="text-xl sm:text-2xl md:text-3xl text-[#c6a46a]"
-                style={{ fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}
-              >
+            <NavLink to="/" className="text-center block" onClick={handleNavClick}>
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#c6a46a]">
                 TC Design Studio
               </h1>
-            </Link>
+            </NavLink>
           </div>
 
           {/* Desktop Left Menu */}
-          <ul className="hidden md:flex items-center gap-10 text-sm tracking-widest text-[#c6a46a]">
-            <li><Link to="/" className="hover:opacity-70">HOME</Link></li>
-            <li><Link to="/about" className="hover:opacity-70">ABOUT</Link></li>
-            <li><Link to="/contact" className="hover:opacity-70">CONTACT</Link></li>
+          <ul className="hidden md:flex items-center gap-10 text-sm tracking-widest">
+            <li>
+              <NavLink to="/" className={navLinkClass} onClick={handleNavClick}>
+                HOME
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/about" className={navLinkClass} onClick={handleNavClick}>
+                ABOUT
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact" className={navLinkClass} onClick={handleNavClick}>
+                CONTACT
+              </NavLink>
+            </li>
           </ul>
 
           {/* Desktop Right Menu */}
-          <ul className="hidden md:flex items-center gap-10 text-sm tracking-widest text-[#c6a46a]">
+          <ul className="hidden md:flex items-center gap-10 text-sm tracking-widest">
             <li>
-              <Link to="/project" className="hover:opacity-70">
+              <NavLink to="/project" className={navLinkClass} onClick={handleNavClick}>
                 PAST PROJECTS
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -62,11 +81,27 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {open && (
           <div className="md:hidden fixed inset-0 top-20 bg-white border-t border-[#e6e1d8] z-40">
-            <ul className="flex flex-col items-center gap-6 py-10 text-sm tracking-widest text-[#c6a46a] overflow-y-auto">
-              <li><Link to="/" onClick={() => setOpen(false)}>HOME</Link></li>
-              <li><Link to="/about" onClick={() => setOpen(false)}>ABOUT</Link></li>
-              <li><Link to="/project" onClick={() => setOpen(false)}>PAST PROJECTS</Link></li>
-              <li><Link to="/contact" onClick={() => setOpen(false)}>CONTACT</Link></li>
+            <ul className="flex flex-col items-center gap-6 py-10 text-sm tracking-widest overflow-y-auto">
+              <li>
+                <NavLink to="/" className={navLinkClass} onClick={handleNavClick}>
+                  HOME
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/about" className={navLinkClass} onClick={handleNavClick}>
+                  ABOUT
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/project" className={navLinkClass} onClick={handleNavClick}>
+                  PAST PROJECTS
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/contact" className={navLinkClass} onClick={handleNavClick}>
+                  CONTACT
+                </NavLink>
+              </li>
             </ul>
           </div>
         )}

@@ -1,99 +1,124 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { 
-  Send, 
-  MapPin, 
-  Phone, 
-  Mail, 
-  Clock, 
-  CheckCircle, 
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Send,
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  CheckCircle,
   ArrowRight,
   Sparkles,
-  MessageSquare
-} from 'lucide-react';
-import Navbar from '../components/Navbar';
+  MessageSquare,
+} from "lucide-react";
+import Navbar from "../components/Navbar";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    projectType: '',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    projectType: "",
+    message: "",
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [activeField, setActiveField] = useState(null);
+  const [phoneError, setPhoneError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // ❌ no alert here
+    if (phoneError) return;
+
     setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbyOhQhKTgsHXkkO67FxUNmnkrrmRmCLBysrWcSAJv_vwGCRuc0_1fjHx7KZaUgoNZWZGw/exec",
+        {
+          method: "POST",
+          body: JSON.stringify(formData),
+        },
+      );
+
       setIsSubmitted(true);
-      setTimeout(() => setIsSubmitted(false), 3000);
       setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        projectType: '',
-        message: ''
+        name: "",
+        email: "",
+        phone: "",
+        projectType: "",
+        message: "",
       });
-    }, 1500);
+
+      setTimeout(() => setIsSubmitted(false), 3000);
+    } catch (error) {
+      alert("Submission failed. Try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+
+    if (name === "phone") {
+  const cleaned = value.replace(/\D/g, "");
+  setFormData({ ...formData, phone: cleaned });
+
+  if (cleaned.length !== 10) {
+    setPhoneError("Phone number must be exactly 10 digits");
+  } else {
+    setPhoneError("");
+  }
+  return;
+}
+
+    setFormData({ ...formData, [name]: value });
   };
 
   const projectTypes = [
-    'Residential Interior',
-    'Commercial Space',
-    'Styling & Curation',
-    'Full Renovation',
-    'Consultation'
+    "Residential Interior",
+    "Commercial Space",
+    "Styling & Curation",
+    "Full Renovation",
+    "Consultation",
   ];
 
   // Floating orb data
   const floatingOrbs = [
-    { top: '10%', left: '5%', size: 'w-4 h-4', delay: 0 },
-    { top: '20%', right: '10%', size: 'w-6 h-6', delay: 0.3 },
-    { top: '40%', left: '15%', size: 'w-3 h-3', delay: 0.6 },
-    { bottom: '20%', right: '5%', size: 'w-5 h-5', delay: 0.9 },
-    { bottom: '30%', left: '10%', size: 'w-4 h-4', delay: 1.2 },
+    { top: "10%", left: "5%", size: "w-4 h-4", delay: 0 },
+    { top: "20%", right: "10%", size: "w-6 h-6", delay: 0.3 },
+    { top: "40%", left: "15%", size: "w-3 h-3", delay: 0.6 },
+    { bottom: "20%", right: "5%", size: "w-5 h-5", delay: 0.9 },
+    { bottom: "30%", left: "10%", size: "w-4 h-4", delay: 1.2 },
   ];
 
   return (
     <section className="relative bg-white py-0 overflow-hidden">
-       
       {/* Floating decorative orbs */}
       {floatingOrbs.map((orb, index) => (
         <motion.div
           key={index}
           initial={{ opacity: 0, scale: 0 }}
-          animate={{ 
+          animate={{
             opacity: [0.1, 0.3, 0.1],
             scale: [1, 1.2, 1],
-            y: [0, -20, 0]
+            y: [0, -20, 0],
           }}
           transition={{
             duration: 3,
             delay: orb.delay,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
           className={`absolute ${orb.size} rounded-full bg-[#c6a46a]/20`}
           style={{
             top: orb.top,
             left: orb.left,
             right: orb.right,
-            bottom: orb.bottom
+            bottom: orb.bottom,
           }}
         />
       ))}
@@ -114,8 +139,6 @@ const ContactUs = () => {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-         
-          
           <h2 className="text-5xl md:text-7xl font-light text-black mb-8">
             <span className="inline-block relative">
               Contact
@@ -128,9 +151,10 @@ const ContactUs = () => {
             </span>
             <span className="block text-[#c6a46a]">Us</span>
           </h2>
-          
+
           <p className="text-xl text-black/70 max-w-2xl mx-auto leading-relaxed">
-            Begin your design journey with us. Share your vision, and let's transform spaces into stories.
+            Begin your design journey with us. Share your vision, and let's
+            transform spaces into stories.
           </p>
         </motion.div>
 
@@ -151,30 +175,46 @@ const ContactUs = () => {
                   icon: <MapPin className="w-6 h-6" />,
                   title: "Visit Our Studio",
                   info: "12 Prithviraj Market\nKhan Market\nNew Delhi 10003",
-                  action: "Get Directions →"
+                  action: "Get Directions →",
+                  onClick: () =>
+                    window.open(
+                      "https://www.google.com/maps?q=12+Prithviraj+Market+Khan+Market+New+Delhi",
+                      "_blank",
+                    ),
                 },
                 {
                   icon: <Phone className="w-6 h-6" />,
                   title: "Call Us",
-                  info: "+1 (555) 123-4567",
-                  action: "Call Now →"
+                  info: "+91 8527767960",
+                  action: "Call Now →",
+                  onClick: () => (window.location.href = "tel:+918527767960"),
                 },
+
                 {
                   icon: <Mail className="w-6 h-6" />,
                   title: "Email Us",
-                  info: "hello@interiordesign.com",
-                  action: "Send Email →"
+                  info: "anmolsingh051@gmail.com",
+                  action: "Send Email →",
+                  onClick: () =>
+                    (window.location.href =
+                      "mailto:hello@interiordesign.com?subject=New Project Inquiry"),
                 },
                 {
                   icon: <Clock className="w-6 h-6" />,
                   title: "Working Hours",
                   info: "Mon-Sun: 10AM - 7:30PM",
-                  action: "Schedule Call →"
-                }
+                  action: "Schedule Call →",
+                  onClick: () =>
+                    window.open(
+                      "https://wa.me/918527767960?text=Hi%20I%20want%20to%20schedule%20a%20call",
+                      "_blank",
+                    ),
+                },
               ].map((item, index) => (
                 <motion.div
                   key={index}
                   whileHover={{ x: 10 }}
+                  onClick={item.onClick}
                   className="group cursor-pointer"
                 >
                   <div className="flex items-start gap-4 p-6 bg-white border border-black/10 rounded-2xl hover:border-[#c6a46a]/30 transition-all duration-300 hover:shadow-lg">
@@ -182,8 +222,12 @@ const ContactUs = () => {
                       {item.icon}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-black font-medium mb-2">{item.title}</h3>
-                      <p className="text-black/60 text-sm mb-3 whitespace-pre-line">{item.info}</p>
+                      <h3 className="text-black font-medium mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-black/60 text-sm mb-3 whitespace-pre-line">
+                        {item.info}
+                      </p>
                       <span className="inline-flex items-center text-[#c6a46a] text-sm font-medium group-hover:gap-2 transition-all duration-300">
                         {item.action}
                       </span>
@@ -193,7 +237,6 @@ const ContactUs = () => {
               ))}
 
               {/* Success Stats */}
-            
             </div>
           </motion.div>
 
@@ -209,12 +252,18 @@ const ContactUs = () => {
               {/* Form Header */}
               <div className="flex items-center justify-between mb-10">
                 <div>
-                  <h3 className="text-3xl font-light text-black mb-2">Start Your Project</h3>
+                  <h3 className="text-3xl font-light text-black mb-2">
+                    Start Your Project
+                  </h3>
                   <p className="text-black/60">Fill in the details below</p>
                 </div>
                 <motion.div
                   animate={{ rotate: isSubmitting ? 360 : 0 }}
-                  transition={{ duration: 2, repeat: isSubmitting ? Infinity : 0, ease: "linear" }}
+                  transition={{
+                    duration: 2,
+                    repeat: isSubmitting ? Infinity : 0,
+                    ease: "linear",
+                  }}
                   className="p-3 rounded-full bg-[#c6a46a]/10"
                 >
                   <Send className="w-6 h-6 text-[#c6a46a]" />
@@ -231,8 +280,12 @@ const ContactUs = () => {
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-6 h-6 text-[#c6a46a]" />
                     <div>
-                      <h4 className="text-black font-medium">Message Sent Successfully!</h4>
-                      <p className="text-black/60 text-sm">We'll get back to you within 24 hours.</p>
+                      <h4 className="text-black font-medium">
+                        Message Sent Successfully!
+                      </h4>
+                      <p className="text-black/60 text-sm">
+                        We'll get back to you within 24 hours.
+                      </p>
                     </div>
                   </div>
                 </motion.div>
@@ -243,18 +296,18 @@ const ContactUs = () => {
                 {/* Top Row - Name & Email */}
                 <div className="grid md:grid-cols-2 gap-6">
                   {[
-                    { 
-                      label: "Full Name", 
-                      name: "name", 
-                      type: "text", 
+                    {
+                      label: "Full Name",
+                      name: "name",
+                      type: "text",
                       placeholder: "Enter your name",
                     },
-                    { 
-                      label: "Email Address", 
-                      name: "email", 
-                      type: "email", 
+                    {
+                      label: "Email Address",
+                      name: "email",
+                      type: "email",
                       placeholder: "you@example.com",
-                    }
+                    },
                   ].map((field) => (
                     <div key={field.name} className="relative">
                       <label className="block text-sm font-medium text-black mb-2">
@@ -276,9 +329,9 @@ const ContactUs = () => {
                           className="w-full px-6 py-4 bg-white border border-black/20 rounded-xl text-black placeholder-black/40 focus:outline-none focus:border-[#c6a46a] focus:ring-2 focus:ring-[#c6a46a]/20 transition-all duration-300"
                         />
                         <motion.span
-                          animate={{ 
+                          animate={{
                             scale: activeField === field.name ? 1.2 : 1,
-                            rotate: activeField === field.name ? 10 : 0
+                            rotate: activeField === field.name ? 10 : 0,
                           }}
                           className="absolute right-4 top-1/2 -translate-y-1/2 text-lg"
                         >
@@ -303,6 +356,9 @@ const ContactUs = () => {
                       placeholder="+1 (555) 000-0000"
                       className="w-full px-6 py-4 bg-white border border-black/20 rounded-xl text-black placeholder-black/40 focus:outline-none focus:border-[#c6a46a] focus:ring-2 focus:ring-[#c6a46a]/20 transition-all duration-300"
                     />
+                    {phoneError && (
+                      <p className="mt-1 text-sm text-red-500">{phoneError}</p>
+                    )}
                   </div>
 
                   <div>
@@ -319,7 +375,9 @@ const ContactUs = () => {
                       >
                         <option value="">Select project type</option>
                         {projectTypes.map((type) => (
-                          <option key={type} value={type}>{type}</option>
+                          <option key={type} value={type}>
+                            {type}
+                          </option>
                         ))}
                       </select>
                       <ArrowRight className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 pointer-events-none rotate-90" />
@@ -343,8 +401,8 @@ const ContactUs = () => {
                       className="w-full px-6 py-4 bg-white border border-black/20 rounded-xl text-black placeholder-black/40 focus:outline-none focus:border-[#c6a46a] focus:ring-2 focus:ring-[#c6a46a]/20 transition-all duration-300 resize-none"
                     />
                     <motion.div
-                      animate={{ 
-                        height: activeField === 'message' ? '100%' : '0%'
+                      animate={{
+                        height: activeField === "message" ? "100%" : "0%",
                       }}
                       className="absolute inset-0 border-2 border-[#c6a46a] rounded-xl pointer-events-none"
                     />
@@ -368,13 +426,13 @@ const ContactUs = () => {
                   className="w-full py-5 bg-black text-white rounded-xl font-medium text-lg hover:bg-[#c6a46a] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group"
                 >
                   <motion.div
-                    animate={{ 
-                      x: isSubmitting ? '100%' : '-100%'
+                    animate={{
+                      x: isSubmitting ? "100%" : "-100%",
                     }}
-                    transition={{ 
+                    transition={{
                       duration: 1.5,
                       repeat: isSubmitting ? Infinity : 0,
-                      ease: "linear"
+                      ease: "linear",
                     }}
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                   />
@@ -383,7 +441,11 @@ const ContactUs = () => {
                       <>
                         <motion.div
                           animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          transition={{
+                            duration: 1,
+                            repeat: Infinity,
+                            ease: "linear",
+                          }}
                           className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
                         />
                         Sending...
@@ -404,13 +466,13 @@ const ContactUs = () => {
 
                 {/* Privacy Note */}
                 <p className="text-center text-black/50 text-sm">
-                  By submitting, you agree to our privacy policy. We respect your data.
+                  By submitting, you agree to our privacy policy. We respect
+                  your data.
                 </p>
               </form>
             </div>
 
             {/* Quick Contact */}
-           
           </motion.div>
         </div>
       </div>

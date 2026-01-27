@@ -2,6 +2,7 @@
 import React from "react";
 import { Award } from "lucide-react";
 import {Link} from "react-router-dom";
+import img from "../assets/img1.jpeg";
 
 const About = () => {
   const stats = [
@@ -21,7 +22,7 @@ const About = () => {
           <div className="relative">
             <div className="h-[300px] sm:h-[380px] md:h-[450px] lg:h-[520px] overflow-hidden rounded-xl">
               <img
-                src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&auto=format&fit=crop&q=80"
+                src={img}
                 alt="About TC Design Studio"
                 className="w-full h-full object-cover"
               />

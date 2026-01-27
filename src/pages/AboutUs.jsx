@@ -1,9 +1,9 @@
 import React from "react";
 import TeamSection from "../components/TeamSection";
+import img1 from "../assets/img1.jpeg";
 
 // Temporary left image
-const aboutImage =
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&auto=format&fit=crop&q=80";
+const aboutImage = img1;
 
 /* Quote SVG Component */
 const QuoteSVG = ({ className }) => (

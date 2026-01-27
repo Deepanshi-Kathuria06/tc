@@ -1,12 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
+import anmol from "../assets/anmol.webp";
+import Sanjay from "../assets/sanjayy.webp"
+import Vaibhav from "../assets/Vaibhavv.webp"
 
 const team = [
   {
     name: "Anmol Singh",
     role: "Design Director",
-    image:
-      "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=600&auto=format&fit=crop&q=80",
+    image: anmol,
     styles: {
       container: "md:mr-auto md:text-left",
       imageWrap: "md:mr-auto",
@@ -24,7 +26,7 @@ const team = [
     name: "Sanjay Shah",
     role: "Associate Architect",
     image:
-      "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=600&auto=format&fit=crop&q=80",
+      Sanjay,
     styles: {
       container: "md:ml-auto md:text-right",
       imageWrap: "md:ml-auto",
@@ -41,8 +43,7 @@ const team = [
   {
     name: "Vaibhav Dwivedi",
     role: "Associate Architect",
-    image:
-      "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=600&auto=format&fit=crop&q=80",
+    image: Vaibhav,
     styles: {
       container: "md:mr-auto md:text-left",
       imageWrap: "md:mr-auto",

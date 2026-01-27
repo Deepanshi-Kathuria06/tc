@@ -1,10 +1,27 @@
 import React from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import instagram from "../assets/instagram-icon.png";
 import mail from "../assets/new-mail-1.png";
 import linkedin from "../assets/linked-in-icon.png";
-import logo from "../assets/Tc_Logo.jpeg";
 
 const Footer = () => {
+  const location = useLocation();
+
+  // Same color stability logic as Navbar
+  const navLinkClass = ({ isActive }) =>
+    isActive
+      ? "text-[#9c7c3d] font-semibold"
+      : "text-gray-600 hover:text-[#c6a46a]";
+
+  // Scroll to top on footer navigation click
+  const handleFooterNavClick = (path) => {
+    if (location.pathname !== path) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <footer className="bg-white border-t border-[#e6e1d8]">
       <div className="max-w-7xl mx-auto px-6 py-14 md:py-20">
@@ -14,11 +31,14 @@ const Footer = () => {
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
             <h1
-      className="text-2xl md:text-3xl text-[#c6a46a]"
-      style={{ fontFamily: "Cormorant Garamond, serif", fontStyle: "italic" }}
-    >
-      TC Design Studio
-    </h1>
+              className="text-2xl md:text-3xl text-[#c6a46a]"
+              style={{
+                fontFamily: "Cormorant Garamond, serif",
+                fontStyle: "italic",
+              }}
+            >
+              TC Design Studio
+            </h1>
 
             <p className="mt-8 text-sm text-gray-600 leading-relaxed max-w-sm">
               Crafting timeless interiors that balance elegance, comfort, and
@@ -28,16 +48,48 @@ const Footer = () => {
           </div>
 
           {/* Navigation */}
-          <div className="mt-0 md:mt-0">
+          <div>
             <h4 className="text-xs tracking-widest text-[#c6a46a]">
               NAVIGATION
             </h4>
 
-            <ul className="mt-1 space-y-4 text-sm text-gray-600">
-              <li className="hover:text-[#c6a46a] cursor-pointer">Home</li>
-              <li className="hover:text-[#c6a46a] cursor-pointer">About</li>
-              <li className="hover:text-[#c6a46a] cursor-pointer">Projects</li>
-              <li className="hover:text-[#c6a46a] cursor-pointer">Contact</li>
+            <ul className="mt-1 space-y-4 text-sm">
+              <li>
+                <NavLink
+                  to="/"
+                  className={navLinkClass}
+                  onClick={() => handleFooterNavClick("/")}
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/about"
+                  className={navLinkClass}
+                  onClick={() => handleFooterNavClick("/about")}
+                >
+                  About
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/project"
+                  className={navLinkClass}
+                  onClick={() => handleFooterNavClick("/project")}
+                >
+                  Projects
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/contact"
+                  className={navLinkClass}
+                  onClick={() => handleFooterNavClick("/contact")}
+                >
+                  Contact
+                </NavLink>
+              </li>
             </ul>
           </div>
 
@@ -56,11 +108,11 @@ const Footer = () => {
                 />
               </a>
 
-              <a href="#" className="group">
+              <a href="mailto:your@email.com" className="group">
                 <img
                   src={mail}
                   alt="Email"
-                  className="w-8 h-8  transition"
+                  className="w-8 h-8 transition"
                 />
               </a>
 
