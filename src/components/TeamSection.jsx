@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import anmol from "../assets/anmol.webp";
 import Sanjay from "../assets/sanjayy.webp"
-import Vaibhav from "../assets/Vaibhavv.webp"
+import Vaibhav from "../assets/vaibhavv.webp"
 
 const team = [
   {
