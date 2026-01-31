@@ -3,17 +3,35 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  const navLinkClass = ({ isActive }) =>
+  // Desktop nav link class
+  const desktopNavLinkClass = ({ isActive }) =>
     isActive
-      ? "text-[#9c7c3d] font-semibold border-b border-[#9c7c3d]"
-      : "text-[#c6a46a] hover:opacity-70";
+      ? "text-gray-800 font-semibold"
+      : "text-gray-700 hover:text-[#c6a46a] transition-colors duration-300";
+
+  // Mobile nav link class - Fixed color consistency
+  const mobileNavLinkClass = ({ isActive }) =>
+    isActive
+      ? "text-[#c6a46a] font-semibold"
+      : "text-gray-800";
 
   const handleNavClick = () => {
-    // Close menu AFTER navigation frame
     requestAnimationFrame(() => {
       setOpen(false);
     });
+  };
+
+  const toggleMenu = () => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    setOpen(!open);
+    
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 300);
   };
 
   /* Lock body scroll when menu open */
@@ -31,19 +49,15 @@ const Navbar = () => {
 
             {/* Mobile Toggle */}
             <button
-              className="md:hidden text-[#c6a46a] z-[60]"
-              onClick={() => setOpen(!open)}
+              className="md:hidden relative w-10 h-10 z-[60] flex items-center justify-center"
+              onClick={toggleMenu}
               aria-label="Toggle Menu"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 6h18M3 12h18M3 18h18" />
-              </svg>
+              <div className="relative w-6 h-6">
+                <div className={`absolute top-0 left-0 w-full h-0.5 bg-gray-800 rounded-full transition-all duration-300 ${open ? 'rotate-45 translate-y-2.5' : ''}`} />
+                <div className={`absolute top-1/2 left-0 w-full h-0.5 bg-gray-800 rounded-full -translate-y-1/2 transition-all duration-300 ${open ? 'opacity-0' : 'opacity-100'}`} />
+                <div className={`absolute bottom-0 left-0 w-full h-0.5 bg-gray-800 rounded-full transition-all duration-300 ${open ? '-rotate-45 -translate-y-2.5' : ''}`} />
+              </div>
             </button>
 
             {/* Logo */}
@@ -57,29 +71,106 @@ const Navbar = () => {
 
             {/* Desktop Left */}
             <ul className="hidden md:flex items-center gap-10 text-sm tracking-widest">
-              <li><NavLink to="/" className={navLinkClass}>HOME</NavLink></li>
-              <li><NavLink to="/about" className={navLinkClass}>ABOUT</NavLink></li>
-              <li><NavLink to="/contact" className={navLinkClass}>CONTACT</NavLink></li>
+              <li>
+                <NavLink to="/" className={desktopNavLinkClass}>
+                  {({ isActive }) => (
+                    <span className="relative pb-1">
+                      HOME
+                      {isActive && (
+                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#c6a46a]"></span>
+                      )}
+                    </span>
+                  )}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/about" className={desktopNavLinkClass}>
+                  {({ isActive }) => (
+                    <span className="relative pb-1">
+                      ABOUT
+                      {isActive && (
+                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#c6a46a]"></span>
+                      )}
+                    </span>
+                  )}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/contact" className={desktopNavLinkClass}>
+                  {({ isActive }) => (
+                    <span className="relative pb-1">
+                      CONTACT
+                      {isActive && (
+                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#c6a46a]"></span>
+                      )}
+                    </span>
+                  )}
+                </NavLink>
+              </li>
             </ul>
 
             {/* Desktop Right */}
             <ul className="hidden md:flex items-center gap-10 text-sm tracking-widest">
-              <li><NavLink to="/project" className={navLinkClass}>GALLERY</NavLink></li>
+              <li>
+                <NavLink to="/project" className={desktopNavLinkClass}>
+                  {({ isActive }) => (
+                    <span className="relative pb-1">
+                      GALLERY
+                      {isActive && (
+                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#c6a46a]"></span>
+                      )}
+                    </span>
+                  )}
+                </NavLink>
+              </li>
             </ul>
           </div>
         </nav>
       </header>
 
-      {/* MOBILE MENU */}
-      {open && (
-        <div className="fixed inset-0 top-20 bg-white z-40 md:hidden">
-          <ul className="flex flex-col items-center gap-6 py-10 text-sm tracking-widest">
-            <li><NavLink to="/" onClick={handleNavClick} className={navLinkClass}>HOME</NavLink></li>
-            <li><NavLink to="/about" onClick={handleNavClick} className={navLinkClass}>ABOUT</NavLink></li>
-            <li><NavLink to="/project" onClick={handleNavClick} className={navLinkClass}>GALLERY</NavLink></li>
-            <li><NavLink to="/contact" onClick={handleNavClick} className={navLinkClass}>CONTACT</NavLink></li>
+      {/* MOBILE MENU - Consistent Colors */}
+      <div className={`fixed inset-0 top-20 bg-white z-40 md:hidden transition-all duration-300 transform ${open ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0 pointer-events-none'}`}>
+        <div className="h-full flex flex-col">
+          <ul className="flex-1 flex flex-col justify-center items-center space-y-8">
+            <li className={`transition-all duration-300 transform ${open ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`} style={{ transitionDelay: '100ms' }}>
+              <NavLink to="/" onClick={handleNavClick} className={mobileNavLinkClass}>
+                <span className="text-2xl font-medium">HOME</span>
+              </NavLink>
+            </li>
+            <li className={`transition-all duration-300 transform ${open ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`} style={{ transitionDelay: '150ms' }}>
+              <NavLink to="/about" onClick={handleNavClick} className={mobileNavLinkClass}>
+                <span className="text-2xl font-medium">ABOUT</span>
+              </NavLink>
+            </li>
+            <li className={`transition-all duration-300 transform ${open ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`} style={{ transitionDelay: '200ms' }}>
+              <NavLink to="/project" onClick={handleNavClick} className={mobileNavLinkClass}>
+                <span className="text-2xl font-medium">GALLERY</span>
+              </NavLink>
+            </li>
+            <li className={`transition-all duration-300 transform ${open ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`} style={{ transitionDelay: '250ms' }}>
+              <NavLink to="/contact" onClick={handleNavClick} className={mobileNavLinkClass}>
+                <span className="text-2xl font-medium">CONTACT</span>
+              </NavLink>
+            </li>
           </ul>
+          
+          {/* Contact Info with Consistent Colors */}
+          <div className="pb-12 text-center">
+            <div className={`mx-auto mb-8 w-24 h-px bg-[#c6a46a] transition-all duration-500 ${open ? 'scale-x-100' : 'scale-x-0'}`}></div>
+            <div className={`transition-all duration-300 ${open ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '300ms' }}>
+              <p className="text-gray-600 text-sm mb-2">Get in touch</p>
+              <p className="text-gray-800 font-medium">anmolsingh051@gmail.com</p>
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* Backdrop Overlay */}
+      {open && (
+        <div 
+          className="fixed inset-0 bg-black/10 z-30 md:hidden"
+          onClick={toggleMenu}
+        />
       )}
 
       {/* Spacer */}

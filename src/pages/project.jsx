@@ -68,7 +68,7 @@ const Projects = () => {
       <section className="bg-white px-6 md:px-16 lg:px-24 py-10">
         {/* Heading */}
         <div className="mb-10 max-w-2xl">
-          <h1 className="text-3xl md:text-4xl font-playfair font-bold text-black">
+          <h1 className="text-3xl md:text-4xl font-playfair font-bold text-black ">
             Gallery
           </h1>
           <p className="text-gray-500 mt-3">
