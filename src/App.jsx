@@ -9,7 +9,7 @@ import About from "./pages/AboutUs";
 import Contact from "./pages/ContactUs";
 import Project from "./pages/project";
 
-/* 🔒 Scroll reset BEFORE paint */
+
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -39,7 +39,7 @@ const AppLayout = () => {
 };
 
 function App() {
-  /* 🚫 Disable browser scroll restoration */
+  
   useLayoutEffect(() => {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
