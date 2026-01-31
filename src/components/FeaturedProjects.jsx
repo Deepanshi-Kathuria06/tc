@@ -92,8 +92,8 @@ const FeaturedProjects = () => {
                   {project.title}
                 </h3>
                 <button className="inline-flex items-center text-gray-600 cursor-pointer hover:text-[#c6a46a] transition-colors duration-300 group">
-                  <span className="text-sm font-medium tracking-wide  ">View Project</span>
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  {/* <span className="text-sm font-medium tracking-wide  ">View Project</span> */}
+                 
                 </button>
               </div>
             </div>

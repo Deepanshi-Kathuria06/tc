@@ -1,6 +1,7 @@
 import React from "react";
 import TeamSection from "../components/TeamSection";
 import img1 from "../assets/img1.jpeg";
+import DesignValues from "../components/DesignValues";
 
 // Temporary left image
 const aboutImage = img1;
@@ -31,7 +32,8 @@ const AboutSection = () => {
           How does that work
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-14 lg:gap-24 items-start">
+        {/* GRID */}
+        <div className="relative grid grid-cols-1 lg:grid-cols-[40%_60%] gap-14 lg:gap-24 items-start">
 
           {/* LEFT — IMAGE */}
           <div className="relative">
@@ -43,74 +45,79 @@ const AboutSection = () => {
           </div>
 
           {/* RIGHT — CONTENT */}
-          <div className="relative max-w-xl mx-auto lg:max-w-none">
+         <div className="
+  relative max-w-xl mx-auto lg:max-w-none
+  pt-16 sm:pt-20 lg:pt-0
+">
 
-            {/* Top Quote */}
-            <QuoteSVG className="w-14 h-14 md:w-20 md:h-20 text-[#c6a46a] mb-6" />
+            {/* TOP QUOTE — RESPONSIVE */}
+            <QuoteSVG
+              className="
+                absolute
+                -top-6 left-0
+                w-12 h-12
+                text-[#c6a46a]
+                pointer-events-none
+
+                sm:-top-8 sm:left-2
+
+                lg:top-[-20px]
+                lg:left-[-10%]
+                lg:w-16 lg:h-16
+              "
+            />
 
             <p className="text-base sm:text-lg leading-relaxed text-black mb-6 font-serif">
-              Our mission is to create spaces and products that people love,
-              as simple as that.
+              Design begins with intention with understanding how people
+              experience space.
             </p>
 
             <p className="text-base sm:text-lg leading-relaxed text-[#c6a46a] italic mb-5 font-serif">
-              And we love what we do.
+              At TC Design Studio, we create interiors and objects shaped by
+              clarity, balance, and purpose.
             </p>
 
             <div className="space-y-1 mb-4">
               <p className="text-base sm:text-lg italic font-serif text-black">
-                We want to create work
+                We pursue work
               </p>
-
-              <p className="text-base sm:text-lg font-serif text-black">
-                <span className="font-semibold">that</span>{" "}
-                <span className="italic">inspires us</span>
-              </p>
-
-              <p className="text-base sm:text-lg font-serif text-black">
-                <span className="font-semibold">that</span>{" "}
-                <span className="italic">
-                  reflects our values and passions as designers
-                </span>
-              </p>
-
-              <p className="text-base sm:text-lg font-serif text-black">
-                <span className="font-semibold">that</span>{" "}
-                <span className="italic">
-                  stands out and stands for something
-                </span>
-              </p>
-
               <p className="text-base sm:text-lg italic font-serif text-black">
-                that inspires our community
+                guided by strong ideas
+              </p>
+              <p className="text-base sm:text-lg italic font-serif text-black">
+                rooted in context
+              </p>
+              <p className="text-base sm:text-lg italic font-serif text-black">
+                defined by honest materials
+              </p>
+              <p className="text-base sm:text-lg italic font-serif text-black">
+                shaped with precision and restraint
+              </p>
+              <p className="text-base sm:text-lg italic font-serif text-black">
+                created to be lived in, not just seen
               </p>
             </div>
 
             <p className="text-sm sm:text-base leading-7 text-gray-700 mb-4 font-serif">
-              So, we try to shape spaces full of character using materials full of
-              personality. We fill spaces with carefully curated artworks and
-              artefacts, always distinctive and often playful, rich with memories
-              and stories.
+              Spaces are formed through proportion, texture, and light. Materials
+              are chosen for their character, and details are refined until they
+              feel effortless.
             </p>
 
             <p className="text-sm sm:text-base leading-7 text-gray-700 mb-4 font-serif">
-              Research, experimentation, and playfulness are essential components
-              of our practice and vital for the development from conception to the
-              final product.
+              Research and exploration are central to our process, allowing ideas
+              to evolve from concept to completion.
             </p>
 
             <p className="text-sm sm:text-base leading-7 text-gray-700 mb-8 font-serif">
-              We are small and flexible, yet experienced, and work closely with
-              our clients throughout the design process.
+              As a small, hands-on studio, we work closely with our clients at
+              every stage, building spaces that feel personal, expressive, and
+              lasting.
             </p>
 
-            <p className="text-base sm:text-lg font-medium text-black">
-              We love to collaborate with ambitious people and brands. Let’s build.
-            </p>
-
-            {/* Bottom Quote */}
+            {/* BOTTOM QUOTE */}
             <div className="flex justify-end mt-10">
-              <QuoteSVG className="w-14 h-14 md:w-20 md:h-20 text-[#c6a46a] rotate-180" />
+              <QuoteSVG className="w-20 h-20 text-[#c6a46a] rotate-180" />
             </div>
 
           </div>
@@ -118,9 +125,11 @@ const AboutSection = () => {
       </div>
 
       {/* Team Section */}
+        <DesignValues />
       <TeamSection />
+    
     </section>
   );
 };
 
-export default AboutSection;  
+export default AboutSection;

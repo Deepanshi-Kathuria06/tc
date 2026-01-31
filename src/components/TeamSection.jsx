@@ -1,66 +1,37 @@
 import React from "react";
 import { motion } from "framer-motion";
-import anmol from "../assets/anmol.webp";
-import Sanjay from "../assets/sanjayy.webp"
-import Vaibhav from "../assets/vaibhavv.webp"
+
+import anmol from "../assets/anmol.jpeg";
+import Sanjay from "../assets/Sanjay.jpeg";
+import Vaibhav from "../assets/vaibhav.jpeg";
 
 const team = [
   {
     name: "Anmol Singh",
     role: "Design Director",
     image: anmol,
-    styles: {
-      container: "md:mr-auto md:text-left",
-      imageWrap: "md:mr-auto",
-      nameStripWrap: "md:flex md:justify-start",
-      nameStripMargin: "md:-mt-[80px] md:mx-60",
-      bioText:
-        "mt-6 md:mt-10 max-w-[520px] mx-auto text-[15px] leading-7 text-justify text-black font-serif",
-    },
-    bio: [
-      "Anmol Singh leads the studio’s design direction, bringing clarity, structure, and thoughtful execution to every project. With hands-on experience across commercial spaces including Camelies, Aralias DLF, Bikaner and several other developments, his work reflects a strong understanding of spatial planning, materiality, and functional design. Focused on collaboration and detail, he plays a key role in shaping environments that are coherent, efficient, and aligned with the client’s vision.",
-    ],
+    bio:
+      "Leads the studio’s design direction, shaping spaces with clarity, structure, and thoughtful execution across residential and commercial projects.",
   },
-
   {
     name: "Sanjay Shah",
     role: "Associate Architect",
-    image:
-      Sanjay,
-    styles: {
-      container: "md:ml-auto md:text-right",
-      imageWrap: "md:ml-auto",
-      nameStripWrap: "md:flex md:justify-end",
-      nameStripMargin: "md:-mt-[80px] md:mx-60",
-      bioText:
-        "mt-6 md:mt-10 max-w-[520px] mx-auto text-[15px] leading-7 text-justify text-black font-serif",
-    },
-    bio: [
-      "Sanjay Shah is an Associate Architect with over 25 years of professional experience, having worked across schools, colleges, and resort projects. His long-standing practice has shaped a methodical and disciplined approach to architecture, with a strong focus on functionality, durability, and contextual responsiveness. At the studio, he supports projects with technical expertise and strategic insight, ensuring design intent is carried through every stage of development.",
-    ],
+    image: Sanjay,
+    bio:
+      "With over 25 years of experience, Sanjay supports projects through technical depth, discipline, and a strong understanding of context.",
   },
-
   {
     name: "Vaibhav Dwivedi",
     role: "Associate Architect",
     image: Vaibhav,
-    styles: {
-      container: "md:mr-auto md:text-left",
-      imageWrap: "md:mr-auto",
-      nameStripWrap: "md:flex md:justify-start",
-      nameStripMargin: "md:-mt-[80px] md:mx-60",
-      bioText:
-        "mt-6 md:mt-10 max-w-[520px] mx-auto text-[15px] leading-7 text-justify text-black font-serif",
-    },
-    bio: [
-      "Vaibhav Dwivedi brings a broad design perspective to the studio, with experience spanning resorts, cafés, and residential spaces. His work focuses on creating environments that feel welcoming, well-considered, and closely connected to how people use and experience a space. He plays an active role in guiding projects from concept to completion, ensuring clarity, consistency, and care throughout the process.",
-    ],
+    bio:
+      "Works across residential, hospitality, and commercial spaces, focusing on intuitive layouts and human-centric design solutions.",
   },
 ];
 
 const TeamSection = () => {
   return (
-    <section className="bg-white py-10">
+    <section className="bg-white py-20">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
@@ -69,47 +40,89 @@ const TeamSection = () => {
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
-          className="text-center text-4xl md:text-5xl font-bold text-black mb-24"
+          className="text-center text-4xl md:text-5xl font-bold text-black mb-20"
         >
-          The Minds Behind the Studio
+          Meet the People Behind the Studio
         </motion.h2>
 
-        {/* Team Members */}
-        <div className="space-y-28 md:-space-y-[150px]">
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
           {team.map((member, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`max-w-2xl mx-auto md:mx-0 text-center md:text-inherit ${member.styles.container}`}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.15, duration: 0.7 }}
+              viewport={{ once: true }}
+              className="group relative rounded-2xl overflow-hidden border border-gray-200"
             >
+
               {/* Image */}
+              <img
+                src={member.image}
+                alt={member.name}
+                className="
+                  w-full h-[420px] object-cover
+                  transition-transform duration-700
+                  group-hover:scale-105
+                "
+              />
+
+              {/* Default Name Strip (VISIBLE ALWAYS) */}
               <div
-                className={`mx-auto md:mx-0 w-[220px] h-[220px] md:w-[300px] md:h-[300px] rounded-full overflow-hidden ${member.styles.imageWrap}`}
+                className="
+                  absolute bottom-0 left-0 right-0
+                  bg-black/60
+                  px-6 py-4
+                  transition-opacity duration-300
+                  group-hover:opacity-0
+                "
               >
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-cover"
-                />
+                <h3 className="text-lg font-medium text-white">
+                  {member.name}
+                </h3>
               </div>
 
-              {/* Name Strip */}
+              {/* Hover Overlay */}
               <div
-                className={`mt-4 md:mt-0 ${member.styles.nameStripWrap} ${member.styles.nameStripMargin}`}
+                className="
+                  absolute inset-0
+                  bg-[#f7f3ec]/95
+                  opacity-0
+                  group-hover:opacity-100
+                  transition-opacity duration-500
+                "
+              />
+
+              {/* Hover Content */}
+              <div
+                className="
+                  absolute inset-0
+                  p-6
+                  flex flex-col justify-end
+                  translate-y-10
+                  group-hover:translate-y-0
+                  opacity-0
+                  group-hover:opacity-100
+                  transition-all duration-500
+                "
               >
-                <div className="bg-black text-white px-6 py-3 inline-block">
-                  <p className="text-lg font-medium">{member.name}</p>
-                  <p className="text-sm italic">{member.role}</p>
-                </div>
+                <h3 className="text-xl font-medium text-black">
+                  {member.name}
+                </h3>
+
+                <p className="text-sm italic text-[#9c7c3d] mb-3">
+                  {member.role}
+                </p>
+
+                <p className="text-sm leading-6 text-gray-700 font-serif">
+                  {member.bio}
+                </p>
               </div>
 
-              {/* Bio */}
-              <div className={member.styles.bioText}>
-                <p>{member.bio[0]}</p>
-              </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );

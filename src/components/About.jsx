@@ -83,7 +83,7 @@ const About = () => {
 
             <div className="flex justify-center sm:justify-start">
               <Link
-  to="/project"
+  to="/about"
   className="inline-block px-8 py-3 border border-[#c6a46a] text-[#c6a46a] text-sm tracking-widest uppercase
              hover:bg-[#c6a46a] hover:text-white transition"
 >
