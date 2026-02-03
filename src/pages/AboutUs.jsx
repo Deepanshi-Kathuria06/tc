@@ -29,7 +29,7 @@ const AboutSection = () => {
 
         {/* Heading */}
         <h2 className="text-center lg:text-right text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-14 lg:mb-20 lg:mx-40">
-          How does that work
+          From Concept to Completion
         </h2>
 
         {/* GRID */}

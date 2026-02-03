@@ -3,21 +3,21 @@ import { Link } from "react-router-dom";
 
 const ContactCTA = () => {
   return (
-    <section className="w-full bg-[#1a3737] py-20">
+    <section className="w-full bg-[#CCBA78] py-20">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-12">
 
           {/* Left Content */}
           <div className="max-w-xl">
-            <span className="text-xs tracking-[0.35em] text-[#fffffe] uppercase">
+            <span className="text-xs tracking-[0.35em] text-black uppercase">
               Contact Us
             </span>
 
-            <h2 className="mt-4 text-3xl md:text-4xl font-light text-white leading-snug">
+            <h2 className="mt-4 text-3xl md:text-4xl font-light text-black leading-snug">
               Let’s design a space that reflects who you are
             </h2>
 
-            <p className="mt-5 text-sm text-white/70 leading-relaxed">
+            <p className="mt-5 text-sm text-black/70 leading-relaxed">
               Whether you are planning a new home, a renovation, or a commercial
               space, our team is here to guide you through every step with
               clarity, creativity, and care.
@@ -31,12 +31,12 @@ const ContactCTA = () => {
               className="
                 inline-flex items-center justify-center
                 px-12 py-4
-                border border-[#c6a46a]
+                border border-black
                 text-sm tracking-widest uppercase
-                text-[#ffffff]
+                text-black
                 transition-all duration-300
-                hover:bg-[#c6a46a]
-                hover:text-[#2f3f44]
+                hover:bg-black
+                hover:text-[#CCBA78]
               "
             >
               Get In Touch

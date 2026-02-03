@@ -181,19 +181,15 @@ const Footer = () => {
                 transition={{ duration: 0.6 }}
               >
                 {/* Studio Name with architectural underline */}
-                <div className="relative mb-4">
-                  <h1
-                    className="text-2xl sm:text-3xl md:text-4xl text-[#9c7c3d]"
-                    style={{
-                      fontFamily: "Cormorant Garamond, serif",
-                      fontStyle: "italic",
-                      fontWeight: 600,
-                    }}
-                  >
-                    TC DESIGN STUDIO
-                  </h1>
-                  <div className="absolute -bottom-2 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-[#9c7c3d] to-transparent" />
-                </div>
+               <div className="relative mb-4">
+  <NavLink to="/" onClick={scrollToTop}>
+    <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#c6a46a]">
+      TC Design Studio
+    </h1>
+  </NavLink>
+
+  <div className="absolute -bottom-2 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-[#9c7c3d] to-transparent" />
+</div>
 
                 {/* Contact Info */}
                 <div className="space-y-3 md:space-y-4">

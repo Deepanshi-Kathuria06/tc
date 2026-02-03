@@ -52,7 +52,7 @@ const Navbar = () => {
               className="md:hidden relative w-10 h-10 z-[60] flex items-center justify-center"
               onClick={toggleMenu}
               aria-label="Toggle Menu"
-            >
+            >     
               <div className="relative w-6 h-6">
                 <div className={`absolute top-0 left-0 w-full h-0.5 bg-gray-800 rounded-full transition-all duration-300 ${open ? 'rotate-45 translate-y-2.5' : ''}`} />
                 <div className={`absolute top-1/2 left-0 w-full h-0.5 bg-gray-800 rounded-full -translate-y-1/2 transition-all duration-300 ${open ? 'opacity-0' : 'opacity-100'}`} />
